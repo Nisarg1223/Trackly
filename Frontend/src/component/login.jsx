@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import realImage1 from '../assets/real_image_1.png';
+import realImage2 from '../assets/real_image_2.png';
+import realImage3 from '../assets/real_image_3.png';
 import './login.scss';
 
 const Login = () => {
@@ -9,6 +12,22 @@ const Login = () => {
   const [rememberMe, setRememberMe] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  // heroStage: 0 = Emblem (0-2s), 1 = real_image_1 (2-4s), 2 = real_image_2 (4-6s), 3 = real_image_3 (6s+)
+  const [heroStage, setHeroStage] = useState(0);
+
+  useEffect(() => {
+    // Cycles every 2 seconds:
+    // 0: First thing (initial emblem & loading style) (2s)
+    // 1: 1st image (real_image_1) (2s)
+    // 2: 2nd image (real_image_2) (2s)
+    // 3: 3rd image (real_image_3) (2s)
+    // -> Then again first thing -> 1st image -> continues with same 2s difference
+    const interval = setInterval(() => {
+      setHeroStage((prev) => (prev + 1) % 4);
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -26,7 +45,6 @@ const Login = () => {
   const handleToggleMode = (e) => {
     e.preventDefault();
     setIsSignUp(!isSignUp);
-    // Clear or prepare fields gracefully
     if (!isSignUp && !username) {
       setUsername('mark_johnson');
     }
@@ -34,16 +52,49 @@ const Login = () => {
 
   return (
     <div className="trackly-auth-page">
-      {/* Left Pane: Brand & Geometric Emblem */}
+      {/* Left Pane: Brand & Geometric Emblem / Transitioned Hero Image */}
       <section className="left-pane" aria-label="Brand Information">
+        {/* Dynamic Hero Image 1 (appears at 2s) */}
+        <div className={`hero-image-layer image-1 ${heroStage >= 1 ? 'visible' : ''}`}>
+          <img
+            src={realImage1}
+            alt="Trackly Website Analysis Visual 1"
+            className="hero-image"
+          />
+          <div className="hero-image-overlay" />
+        </div>
+
+        {/* Dynamic Hero Image 2 (appears at 4s, 2s after real_image_1) */}
+        <div className={`hero-image-layer image-2 ${heroStage >= 2 ? 'visible' : ''}`}>
+          <img
+            src={realImage2}
+            alt="Trackly Website Analysis Visual 2"
+            className="hero-image"
+          />
+          <div className="hero-image-overlay" />
+        </div>
+
+        {/* Dynamic Hero Image 3 (appears at 6s, 2s after real_image_2) */}
+        <div className={`hero-image-layer image-3 ${heroStage >= 3 ? 'visible' : ''}`}>
+          <img
+            src={realImage3}
+            alt="Trackly Website Analysis Visual 3"
+            className="hero-image"
+          />
+          <div className="hero-image-overlay" />
+        </div>
+
         <header className="brand-header">
           <div className="brand-title">
             Trackly<span className="brand-registered">®</span>
           </div>
         </header>
 
-        {/* Central Compass Guideline & Starburst Emblem */}
-        <div className="emblem-container" aria-hidden="true">
+        {/* Central Compass Guideline & Starburst Emblem (fades out when image arrives) */}
+        <div
+          className={`emblem-container ${heroStage >= 1 ? 'fade-out' : ''}`}
+          aria-hidden="true"
+        >
           <svg
             className="emblem-svg"
             viewBox="0 0 800 800"
@@ -57,26 +108,17 @@ const Login = () => {
             <line className="guide-line" x1="0" y1="800" x2="800" y2="0" />
 
             {/* 8-Point Compass Star Rays */}
-            {/* Top vertical ray */}
             <line className="star-ray" x1="400" y1="378" x2="400" y2="305" />
-            {/* Bottom vertical ray */}
             <line className="star-ray" x1="400" y1="422" x2="400" y2="495" />
-            {/* Left horizontal ray */}
             <line className="star-ray" x1="378" y1="400" x2="305" y2="400" />
-            {/* Right horizontal ray */}
             <line className="star-ray" x1="422" y1="400" x2="495" y2="400" />
 
-            {/* Diagonal rays at 45 degrees */}
-            {/* Top-Right ray */}
             <line className="star-ray" x1="423" y1="377" x2="466" y2="334" />
-            {/* Bottom-Right ray */}
             <line className="star-ray" x1="423" y1="423" x2="466" y2="466" />
-            {/* Bottom-Left ray */}
             <line className="star-ray" x1="377" y1="423" x2="334" y2="466" />
-            {/* Top-Left ray */}
             <line className="star-ray" x1="377" y1="377" x2="334" y2="334" />
 
-            {/* Central Angled Slash - Signature Brand Element */}
+            {/* Central Angled Slash */}
             <line className="center-slash" x1="389" y1="411" x2="411" y2="389" />
           </svg>
         </div>
@@ -194,7 +236,6 @@ const Login = () => {
                       title={showPassword ? 'Hide password' : 'Show password'}
                     >
                       {showPassword ? (
-                        /* Eye Open Icon */
                         <svg
                           viewBox="0 0 24 24"
                           fill="none"
@@ -207,7 +248,6 @@ const Login = () => {
                           <circle cx="12" cy="12" r="3" />
                         </svg>
                       ) : (
-                        /* Masked / Eye Icon as seen in design */
                         <svg
                           viewBox="0 0 24 24"
                           fill="none"

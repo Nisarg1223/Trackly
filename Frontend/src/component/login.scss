@@ -18,26 +18,93 @@ $line-input-active: #ffffff;
 .trackly-auth-page,
 .golden-login-page {
   width: 100vw;
-  min-height: 100vh;
+  height: 100vh;
+  box-sizing: border-box;
   background-color: $bg-dark;
   display: flex;
+  padding: 20px;
+  gap: 20px;
   overflow: hidden;
   position: relative;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 
-  // Left Section (Branding & Compass Starburst)
+  // Left Section (Curved Card at same level as Right Card)
   .left-pane {
     flex: 1;
+    height: 100%;
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 44px 52px;
-    background-color: $bg-dark;
-    z-index: 1;
+    padding: 40px 48px;
+    background-color: #0b0b0d;
+    border-radius: 28px;
+    border: 1px solid $card-border;
+    box-shadow: 
+      0 25px 60px -15px rgba(0, 0, 0, 0.8),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    overflow: hidden;
     user-select: none;
+    z-index: 1;
+
+    // Transitioning Hero Image Layer (curved with border-radius: 28px)
+    .hero-image-layer {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      overflow: hidden;
+      opacity: 0;
+      transform: scale(1.04);
+      transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 1;
+      pointer-events: none;
+
+      &.visible {
+        opacity: 1;
+        transform: scale(1);
+        pointer-events: auto;
+      }
+
+      &.image-2 {
+        z-index: 2;
+      }
+
+      &.image-3 {
+        z-index: 3;
+      }
+
+      .hero-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        display: block;
+        border-radius: inherit;
+      }
+
+      .hero-image-overlay {
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.45) 0%,
+          rgba(0, 0, 0, 0.05) 25%,
+          rgba(0, 0, 0, 0.05) 75%,
+          rgba(0, 0, 0, 0.6) 100%
+        );
+        pointer-events: none;
+      }
+    }
 
     .brand-header {
+      position: relative;
+      z-index: 5;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+
       .brand-title {
         font-size: 20px;
         font-weight: 600;
@@ -68,6 +135,16 @@ $line-input-active: #ffffff;
       display: flex;
       align-items: center;
       justify-content: center;
+      z-index: 4;
+      opacity: 1;
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+
+      &.fade-out {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.92);
+        z-index: 0;
+      }
 
       .emblem-svg {
         width: 100%;
@@ -86,7 +163,6 @@ $line-input-active: #ffffff;
           stroke: #ffffff;
           stroke-width: 6.5;
           stroke-linecap: round;
-          transition: stroke 0.3s ease;
         }
 
         .center-slash {
@@ -98,26 +174,31 @@ $line-input-active: #ffffff;
     }
 
     .brand-footer {
+      position: relative;
+      z-index: 5;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+
       .copyright-text {
         font-size: 11.5px;
-        color: rgba(255, 255, 255, 0.35);
+        color: rgba(255, 255, 255, 0.5);
         font-weight: 400;
         letter-spacing: 0.01em;
       }
     }
   }
 
-  // Right Section (Auth Card)
+  // Right Section (Auth Card, exact same level and curvature)
   .right-pane {
     flex: 1;
+    height: 100%;
     display: flex;
     align-items: stretch;
     justify-content: center;
-    padding: 22px 24px 22px 10px;
     z-index: 2;
 
     .login-card {
       flex: 1;
+      height: 100%;
       border-radius: 28px;
       background: radial-gradient(
         ellipse 95% 85% at 0% 50%,
@@ -409,13 +490,14 @@ $line-input-active: #ffffff;
 
   // Responsive Breakpoints
   @media (max-width: 1024px) {
+    padding: 16px;
+    gap: 16px;
+
     .left-pane {
       padding: 32px 36px;
     }
 
     .right-pane {
-      padding: 16px;
-
       .login-card {
         .card-top {
           padding: 32px 36px 0;
@@ -448,12 +530,17 @@ $line-input-active: #ffffff;
 
   @media (max-width: 768px) {
     flex-direction: column;
+    height: auto;
     min-height: 100vh;
+    padding: 14px;
+    gap: 14px;
     overflow-y: auto;
 
     .left-pane {
-      min-height: 300px;
+      min-height: 380px;
+      height: 380px;
       padding: 24px 20px;
+      border-radius: 22px;
       flex: none;
 
       .emblem-container {
@@ -467,11 +554,10 @@ $line-input-active: #ffffff;
     }
 
     .right-pane {
-      padding: 12px;
       flex: none;
 
       .login-card {
-        border-radius: 20px;
+        border-radius: 22px;
         min-height: 520px;
 
         .card-top {
