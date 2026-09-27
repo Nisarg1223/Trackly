@@ -1,0 +1,507 @@
+// Trackly Design System & Auth SCSS
+$bg-dark: #000000;
+$card-bg-start: #1c1c20;
+$card-bg-mid: #151518;
+$card-bg-end: #0e0e10;
+$card-border: rgba(255, 255, 255, 0.06);
+$card-border-glow: rgba(255, 255, 255, 0.12);
+
+$text-primary: #ffffff;
+$text-secondary: #909096;
+$text-muted: #6e6e74;
+$text-dark: #000000;
+
+$line-subtle: rgba(255, 255, 255, 0.08);
+$line-input: rgba(255, 255, 255, 0.25);
+$line-input-active: #ffffff;
+
+.trackly-auth-page,
+.golden-login-page {
+  width: 100vw;
+  min-height: 100vh;
+  background-color: $bg-dark;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  // Left Section (Branding & Compass Starburst)
+  .left-pane {
+    flex: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 44px 52px;
+    background-color: $bg-dark;
+    z-index: 1;
+    user-select: none;
+
+    .brand-header {
+      .brand-title {
+        font-size: 20px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        color: $text-primary;
+        display: inline-flex;
+        align-items: flex-start;
+
+        .brand-registered {
+          font-size: 10px;
+          margin-left: 4px;
+          position: relative;
+          top: -2px;
+          font-weight: 400;
+          color: rgba(255, 255, 255, 0.85);
+        }
+      }
+    }
+
+    .emblem-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .emblem-svg {
+        width: 100%;
+        height: 100%;
+        max-width: 900px;
+        max-height: 900px;
+        overflow: visible;
+
+        .guide-line {
+          stroke: $line-subtle;
+          stroke-width: 1;
+          vector-effect: non-scaling-stroke;
+        }
+
+        .star-ray {
+          stroke: #ffffff;
+          stroke-width: 6.5;
+          stroke-linecap: round;
+          transition: stroke 0.3s ease;
+        }
+
+        .center-slash {
+          stroke: #ffffff;
+          stroke-width: 6.5;
+          stroke-linecap: round;
+        }
+      }
+    }
+
+    .brand-footer {
+      .copyright-text {
+        font-size: 11.5px;
+        color: rgba(255, 255, 255, 0.35);
+        font-weight: 400;
+        letter-spacing: 0.01em;
+      }
+    }
+  }
+
+  // Right Section (Auth Card)
+  .right-pane {
+    flex: 1;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    padding: 22px 24px 22px 10px;
+    z-index: 2;
+
+    .login-card {
+      flex: 1;
+      border-radius: 28px;
+      background: radial-gradient(
+        ellipse 95% 85% at 0% 50%,
+        rgba(36, 36, 42, 0.95) 0%,
+        rgba(22, 22, 26, 0.98) 45%,
+        rgba(14, 14, 16, 1) 100%
+      );
+      border: 1px solid $card-border;
+      box-shadow: 
+        0 25px 60px -15px rgba(0, 0, 0, 0.8),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+
+      // Card Header
+      .card-top {
+        display: flex;
+        justify-content: flex-end;
+        padding: 40px 48px 0;
+
+        .create-account-link {
+          background: none;
+          border: none;
+          padding: 0;
+          font-family: inherit;
+          font-size: 13px;
+          color: $text-secondary;
+          text-decoration: none;
+          font-weight: 400;
+          cursor: pointer;
+          transition: color 0.2s ease, opacity 0.2s ease;
+
+          &:hover {
+            color: $text-primary;
+          }
+        }
+      }
+
+      // Card Body / Form Area
+      .card-body {
+        padding: 0 54px;
+        margin-top: auto;
+        margin-bottom: auto;
+        transition: opacity 0.25s ease, transform 0.25s ease;
+
+        .login-heading {
+          font-size: 54px;
+          font-weight: 400;
+          color: $text-primary;
+          letter-spacing: -0.02em;
+          margin-bottom: 46px;
+          line-height: 1.1;
+          transition: all 0.25s ease;
+        }
+
+        .login-form {
+          .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            column-gap: 36px;
+            row-gap: 22px;
+            transition: all 0.3s ease;
+
+            &.is-signup {
+              row-gap: 24px;
+            }
+
+            .field-group {
+              display: flex;
+              flex-direction: column;
+              animation: fadeInField 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+
+              &.span-full {
+                grid-column: 1 / -1;
+              }
+
+              .field-label {
+                font-size: 12px;
+                font-weight: 500;
+                color: $text-muted;
+                margin-bottom: 10px;
+                letter-spacing: 0.01em;
+              }
+
+              .input-underline-wrapper {
+                position: relative;
+                display: flex;
+                align-items: center;
+                border-bottom: 1px solid $line-input;
+                transition: border-color 0.25s ease;
+
+                &:focus-within {
+                  border-bottom-color: $line-input-active;
+                }
+
+                .clean-input {
+                  width: 100%;
+                  background: transparent;
+                  border: none;
+                  outline: none;
+                  color: $text-primary;
+                  font-family: inherit;
+                  font-size: 15px;
+                  font-weight: 400;
+                  padding: 8px 0;
+                  line-height: 1.4;
+
+                  &::placeholder {
+                    color: rgba(255, 255, 255, 0.3);
+                  }
+
+                  &.password-input {
+                    letter-spacing: 2px;
+                    font-size: 16px;
+                    padding-right: 28px;
+                  }
+                }
+
+                .input-action-btn {
+                  position: absolute;
+                  right: 0;
+                  background: none;
+                  border: none;
+                  padding: 4px;
+                  cursor: pointer;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: $text-muted;
+                  transition: color 0.2s ease, transform 0.2s ease;
+
+                  &:hover {
+                    color: $text-primary;
+                    transform: scale(1.1);
+                  }
+
+                  svg {
+                    width: 17px;
+                    height: 17px;
+                    display: block;
+                  }
+                }
+              }
+
+              .field-sub-action {
+                margin-top: 14px;
+                display: flex;
+                align-items: center;
+
+                .remember-me-toggle {
+                  display: inline-flex;
+                  align-items: center;
+                  gap: 8px;
+                  cursor: pointer;
+                  background: none;
+                  border: none;
+                  padding: 0;
+                  color: $text-secondary;
+                  font-size: 12.5px;
+                  font-family: inherit;
+                  user-select: none;
+                  transition: color 0.2s ease;
+
+                  &:hover {
+                    color: $text-primary;
+                  }
+
+                  .custom-checkbox {
+                    width: 16px;
+                    height: 16px;
+                    border-radius: 50%;
+                    border: 1px solid rgba(255, 255, 255, 0.4);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    transition: all 0.2s ease;
+
+                    &.checked {
+                      border-color: #ffffff;
+                      background-color: transparent;
+
+                      svg {
+                        opacity: 1;
+                        transform: scale(1);
+                      }
+                    }
+
+                    svg {
+                      width: 10px;
+                      height: 10px;
+                      stroke: #ffffff;
+                      stroke-width: 2.2;
+                      stroke-linecap: round;
+                      stroke-linejoin: round;
+                      fill: none;
+                      opacity: 0;
+                      transform: scale(0.6);
+                      transition: all 0.2s ease;
+                    }
+                  }
+
+                  .remember-label {
+                    color: inherit;
+                    font-size: 12.5px;
+                  }
+                }
+
+                .forgot-password-link {
+                  font-size: 12.5px;
+                  color: $text-secondary;
+                  text-decoration: none;
+                  cursor: pointer;
+                  transition: color 0.2s ease;
+
+                  &:hover {
+                    color: $text-primary;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      // Card Bottom / Sign In / Sign Up Button
+      .card-bottom {
+        display: flex;
+        justify-content: flex-end;
+        padding: 0 48px 48px;
+
+        .sign-in-btn {
+          width: 96px;
+          height: 96px;
+          border-radius: 50%;
+          background-color: #ffffff;
+          color: $text-dark;
+          border: none;
+          outline: none;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-family: inherit;
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                      box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                      background-color 0.2s ease;
+          user-select: none;
+
+          &:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.28);
+          }
+
+          &:active {
+            transform: scale(0.97);
+          }
+
+          &:focus-visible {
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.4), 0 0 25px rgba(255, 255, 255, 0.3);
+          }
+
+          &.loading {
+            opacity: 0.8;
+            pointer-events: none;
+          }
+        }
+      }
+    }
+  }
+
+  // Keyframes for field transitions
+  @keyframes fadeInField {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  // Responsive Breakpoints
+  @media (max-width: 1024px) {
+    .left-pane {
+      padding: 32px 36px;
+    }
+
+    .right-pane {
+      padding: 16px;
+
+      .login-card {
+        .card-top {
+          padding: 32px 36px 0;
+        }
+
+        .card-body {
+          padding: 0 36px;
+
+          .login-heading {
+            font-size: 44px;
+            margin-bottom: 36px;
+          }
+
+          .login-form .form-grid {
+            column-gap: 24px;
+          }
+        }
+
+        .card-bottom {
+          padding: 0 36px 36px;
+
+          .sign-in-btn {
+            width: 86px;
+            height: 86px;
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-y: auto;
+
+    .left-pane {
+      min-height: 300px;
+      padding: 24px 20px;
+      flex: none;
+
+      .emblem-container {
+        position: relative;
+        top: 0;
+        left: 0;
+        transform: none;
+        height: 200px;
+        margin: 16px 0;
+      }
+    }
+
+    .right-pane {
+      padding: 12px;
+      flex: none;
+
+      .login-card {
+        border-radius: 20px;
+        min-height: 520px;
+
+        .card-top {
+          padding: 24px 24px 0;
+        }
+
+        .card-body {
+          padding: 0 24px;
+          margin: 28px 0;
+
+          .login-heading {
+            font-size: 38px;
+            margin-bottom: 24px;
+          }
+
+          .login-form .form-grid {
+            grid-template-columns: 1fr;
+            row-gap: 20px;
+          }
+        }
+
+        .card-bottom {
+          padding: 0 24px 28px;
+
+          .sign-in-btn {
+            width: 80px;
+            height: 80px;
+          }
+        }
+      }
+    }
+  }
+}
