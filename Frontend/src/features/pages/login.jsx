@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import realImage1 from '../assets/real_image_1.png';
-import realImage2 from '../assets/real_image_2.png';
-import realImage3 from '../assets/real_image_3.png';
+import realImage1 from '../../assets/real_image_1.png';
+import realImage2 from '../../assets/real_image_2.png';
+import realImage3 from '../../assets/real_image_3.png';
 import './login.scss';
 
 const Login = () => {
