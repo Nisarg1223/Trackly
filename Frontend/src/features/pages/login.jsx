@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import realImage1 from '../../assets/real_image_1.png';
 import realImage2 from '../../assets/real_image_2.png';
 import realImage3 from '../../assets/real_image_3.png';
+import useAuth from '../hooks/useAuth.js';
 import './login.scss';
 
 const Login = () => {
@@ -11,9 +12,11 @@ const Login = () => {
   const [password, setPassword] = useState('password123');
   const [rememberMe, setRememberMe] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [authSuccess, setAuthSuccess] = useState('');
   // heroStage: 0 = Emblem (0-2s), 1 = real_image_1 (2-4s), 2 = real_image_2 (4-6s), 3 = real_image_3 (6s+)
   const [heroStage, setHeroStage] = useState(0);
+
+  const { handleLogin, handleRegister, user, loading, error, clearError } = useAuth();
 
   useEffect(() => {
     // Cycles every 2 seconds:
@@ -29,22 +32,37 @@ const Login = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
-      if (isSignUp) {
-        alert(`Account created successfully!\nUsername: ${username || 'N/A'}\nEmail: ${email}`);
-      } else {
-        alert(`Logged in as: ${email}`);
+  const handleSubmit = async (e) => {
+    if (e && e.preventDefault) {
+      e.preventDefault();
+    }
+    setAuthSuccess('');
+
+    if (isSignUp) {
+      const data = await handleRegister({
+        email,
+        password,
+        username,
+      });
+      if (data) {
+        setAuthSuccess(`Account created successfully! Welcome, ${data.user?.username || username}!`);
       }
-    }, 600);
+    } else {
+      const data = await handleLogin({
+        email,
+        password,
+      });
+      if (data) {
+        setAuthSuccess(`Welcome back, ${data.user?.username || email}!`);
+      }
+    }
   };
 
   const handleToggleMode = (e) => {
     e.preventDefault();
     setIsSignUp(!isSignUp);
+    setAuthSuccess('');
+    clearError?.();
     if (!isSignUp && !username) {
       setUsername('mark_johnson');
     }
@@ -151,7 +169,41 @@ const Login = () => {
               {isSignUp ? 'Create Account' : 'Login'}
             </h1>
 
-            <form className="login-form" onSubmit={handleSubmit}>
+            {/* Error Banner */}
+            {error && (
+              <div className="auth-alert auth-error" role="alert">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="12" y1="8" x2="12" y2="12" />
+                  <line x1="12" y1="16" x2="12.01" y2="16" />
+                </svg>
+                <span>{error}</span>
+              </div>
+            )}
+
+            {/* Success Banner */}
+            {authSuccess && (
+              <div className="auth-alert auth-success" role="status">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                  <polyline points="22 4 12 14.01 9 11.01" />
+                </svg>
+                <span>{authSuccess}</span>
+              </div>
+            )}
+
+            {/* Already Authenticated Info */}
+            {user && !authSuccess && !error && (
+              <div className="auth-alert auth-success" role="status">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                  <polyline points="22 4 12 14.01 9 11.01" />
+                </svg>
+                <span>Logged in as {user.username || user.email}</span>
+              </div>
+            )}
+
+            <form className="login-form" id="auth-form" onSubmit={handleSubmit}>
               <div className={`form-grid ${isSignUp ? 'is-signup' : ''}`}>
                 {/* When in Sign Up Mode: Username field is shown */}
                 {isSignUp && (
@@ -285,12 +337,14 @@ const Login = () => {
           {/* Bottom Card Action: Sign In / Sign Up Button */}
           <div className="card-bottom">
             <button
-              type="button"
-              className={`sign-in-btn ${isSubmitting ? 'loading' : ''}`}
+              type="submit"
+              form="auth-form"
+              className={`sign-in-btn ${loading ? 'loading' : ''}`}
               onClick={handleSubmit}
+              disabled={loading}
               id="sign-in-submit-btn"
             >
-              {isSubmitting ? '...' : isSignUp ? 'SIGN UP' : 'SIGN IN'}
+              {loading ? '...' : isSignUp ? 'SIGN UP' : 'SIGN IN'}
             </button>
           </div>
         </div>
