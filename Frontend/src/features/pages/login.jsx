@@ -13,21 +13,21 @@ const Login = () => {
   const [rememberMe, setRememberMe] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [authSuccess, setAuthSuccess] = useState('');
-  // heroStage: 0 = Emblem (0-2s), 1 = real_image_1 (2-4s), 2 = real_image_2 (4-6s), 3 = real_image_3 (6s+)
+  // heroStage: 0 = Emblem (0-3s), 1 = real_image_1 (3-6s), 2 = real_image_2 (6-9s), 3 = real_image_3 (9-12s)
   const [heroStage, setHeroStage] = useState(0);
 
   const { handleLogin, handleRegister, user, loading, error, clearError } = useAuth();
 
   useEffect(() => {
-    // Cycles every 2 seconds:
-    // 0: First thing (initial emblem & loading style) (2s)
-    // 1: 1st image (real_image_1) (2s)
-    // 2: 2nd image (real_image_2) (2s)
-    // 3: 3rd image (real_image_3) (2s)
-    // -> Then again first thing -> 1st image -> continues with same 2s difference
+    // Cycles every 3 seconds:
+    // 0: First thing (initial emblem & loading style) (3s)
+    // 1: 1st image (real_image_1) (3s)
+    // 2: 2nd image (real_image_2) (3s)
+    // 3: 3rd image (real_image_3) (3s)
+    // -> Continues smoothly with 3s difference between each stage
     const interval = setInterval(() => {
       setHeroStage((prev) => (prev + 1) % 4);
-    }, 2000);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, []);
@@ -72,7 +72,7 @@ const Login = () => {
     <div className="trackly-auth-page">
       {/* Left Pane: Brand & Geometric Emblem / Transitioned Hero Image */}
       <section className="left-pane" aria-label="Brand Information">
-        {/* Dynamic Hero Image 1 (appears at 2s) */}
+        {/* Dynamic Hero Image 1 (appears at 3s) */}
         <div className={`hero-image-layer image-1 ${heroStage >= 1 ? 'visible' : ''}`}>
           <img
             src={realImage1}
@@ -82,7 +82,7 @@ const Login = () => {
           <div className="hero-image-overlay" />
         </div>
 
-        {/* Dynamic Hero Image 2 (appears at 4s, 2s after real_image_1) */}
+        {/* Dynamic Hero Image 2 (appears at 6s, 3s after real_image_1) */}
         <div className={`hero-image-layer image-2 ${heroStage >= 2 ? 'visible' : ''}`}>
           <img
             src={realImage2}
@@ -92,7 +92,7 @@ const Login = () => {
           <div className="hero-image-overlay" />
         </div>
 
-        {/* Dynamic Hero Image 3 (appears at 6s, 2s after real_image_2) */}
+        {/* Dynamic Hero Image 3 (appears at 9s, 3s after real_image_2) */}
         <div className={`hero-image-layer image-3 ${heroStage >= 3 ? 'visible' : ''}`}>
           <img
             src={realImage3}
