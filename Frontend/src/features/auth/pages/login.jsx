@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import realImage1 from '../../assets/real_image_1.png';
-import realImage2 from '../../assets/real_image_2.png';
-import realImage3 from '../../assets/real_image_3.png';
+import { Link } from 'react-router-dom';
+import realImage1 from '../../../assets/real_image_1.png';
+import realImage2 from '../../../assets/real_image_2.png';
+import realImage3 from '../../../assets/real_image_3.png';
 import useAuth from '../hooks/useAuth.js';
 import './login.scss';
 
@@ -103,9 +104,9 @@ const Login = () => {
         </div>
 
         <header className="brand-header">
-          <div className="brand-title">
+          <Link to="/" className="brand-title" style={{ textDecoration: 'none', color: 'inherit', display: 'inline-flex', alignItems: 'center' }}>
             Trackly<span className="brand-registered">®</span>
-          </div>
+          </Link>
         </header>
 
         {/* Central Compass Guideline & Starburst Emblem (fades out when image arrives) */}
@@ -152,7 +153,10 @@ const Login = () => {
       <section className="right-pane" aria-label="Authentication Panel">
         <div className="login-card">
           {/* Top navigation link */}
-          <div className="card-top">
+          <div className="card-top" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <Link to="/" className="create-account-link" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+              ← Back to Home
+            </Link>
             <button
               type="button"
               className="create-account-link"
