@@ -268,7 +268,7 @@ const Home = () => {
             {/* Menu links */}
             <ul className="header-nav-menu">
               <li className="nav-item"><a href="#features">Product</a></li>
-              <li className="nav-item"><a href="#blocks">Blocks</a></li>
+              <li className="nav-item"><Link to="/contact">Contact</Link></li>
               <li className="nav-item"><a href="#templates">Templates</a></li>
               <li className="nav-item"><a href="#pricing">Pricing</a></li>
               <li className="nav-item"><a href="#blog">Blog</a></li>
@@ -299,10 +299,10 @@ const Home = () => {
                     </a>
                   </li>
                   <li className="dropdown-item">
-                    <a href="#blocks" onClick={() => setIsDropdownOpen(false)}>
-                      <span className="item-label">Blocks</span>
-                      <span className="item-hint">Browse 1000s of blocks</span>
-                    </a>
+                    <Link to="/contact" onClick={() => setIsDropdownOpen(false)}>
+                      <span className="item-label">Contact</span>
+                      <span className="item-hint">Join newsletter & get in touch</span>
+                    </Link>
                   </li>
                   <li className="dropdown-item">
                     <a href="#templates" onClick={() => setIsDropdownOpen(false)}>
