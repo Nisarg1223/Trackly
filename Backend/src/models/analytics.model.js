@@ -1,16 +1,23 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
-const analyticsSchema = new mongoose.Schema({
-    projectId:{
-        type: mongoose.Schema.Types.ObjectId,
-        required:true
-    },
-    totalVisits:{
-        type:Number,
-        default:0
+const analyticsSchema = new mongoose.Schema(
+  {
+    projectId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Project",
+      required: true,
+      unique: true,
     },
 
-},{timestamps:true});
+    totalVisits: {
+      type: Number,
+      default: 0,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
 const analyticsModel = mongoose.model("Analytics", analyticsSchema);
 
