@@ -2,6 +2,8 @@ import express from 'express';
 import authRouter from './routes/auth.routes.js';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
+import analyticsRouter from "./routes/analytics.routes.js";
+import projectRouter from './routes/project.routes.js';
 
 const app = express();
 app.use(express.json());
@@ -16,4 +18,8 @@ app.use(cors({
 
 //authentication
 app.use('/api/auth',authRouter);
+// create project api
+app.use("/api/projects", projectRouter);
+app.use('/api/analytics',analyticsRouter);
+
 export default app;
