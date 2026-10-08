@@ -8,31 +8,37 @@ const API_URL = "http://localhost:3000/api/analytics/visit";
 function getBrowser() {
   const userAgent = navigator.userAgent;
 
+  // Brave
+  if (navigator.brave && typeof navigator.brave.isBrave === "function") {
+    return "Brave";
+  }
+
+  // Edge
   if (userAgent.includes("Edg")) {
     return "Edge";
   }
 
+  // Opera
   if (userAgent.includes("OPR") || userAgent.includes("Opera")) {
     return "Opera";
   }
 
-  if (userAgent.includes("Brave")) {
-    return "Brave";
-  }
-
+  // Chrome
   if (userAgent.includes("Chrome")) {
     return "Chrome";
   }
 
+  // Firefox
   if (userAgent.includes("Firefox")) {
     return "Firefox";
   }
 
+  // Safari
   if (userAgent.includes("Safari")) {
     return "Safari";
   }
 
-  return "Unknown";
+  return "Other";
 }
 
 // ------------------------------------
@@ -61,7 +67,7 @@ function getOperatingSystem() {
     return "Linux";
   }
 
-  return "Unknown";
+  return "Other";
 }
 
 // ------------------------------------
@@ -124,5 +130,3 @@ if (window.name === "trackly_session") {
       console.error("❌ Trackly error:", error);
     });
 }
-
-
