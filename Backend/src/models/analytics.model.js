@@ -13,6 +13,22 @@ const analyticsSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+     browsers: {
+      type: Map,
+      of: Number,
+      default: {},
+    },
+      operatingSystems: {
+      type: Map,
+      of: Number,
+      default: {},
+    },
+
+    devices: {
+      type: Map,
+      of: Number,
+      default: {},
+    },
   },
   {
     timestamps: true,
