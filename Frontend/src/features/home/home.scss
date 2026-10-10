@@ -266,7 +266,20 @@
       .logo-link {
         display: flex;
         align-items: center;
-        color: var(--butter-charcoal);
+        text-decoration: none;
+
+        .nav-trackly-logo {
+          height: 24px;
+          width: auto;
+          display: block;
+          mix-blend-mode: multiply;
+          object-fit: contain;
+          transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        &:hover .nav-trackly-logo {
+          transform: scale(1.04);
+        }
 
         svg {
           width: 96px;
