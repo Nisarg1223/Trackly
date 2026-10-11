@@ -8,8 +8,8 @@ const Envelope = ({ side = 'left' }) => {
 
   return (
     <div className={`envelope-wrapper envelope-${side}`}>
-      <svg 
-        viewBox="0 0 540 370" 
+      <svg
+        viewBox="0 0 540 370"
         className="envelope-svg"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -60,40 +60,40 @@ const Envelope = ({ side = 'left' }) => {
         </defs>
 
         {/* Envelope Base Body */}
-        <rect 
-          x="12" 
-          y="12" 
-          width="516" 
-          height="346" 
-          rx="18" 
-          ry="18" 
-          fill={`url(#${gradIdPrefix}-base)`} 
+        <rect
+          x="12"
+          y="12"
+          width="516"
+          height="346"
+          rx="18"
+          ry="18"
+          fill={`url(#${gradIdPrefix}-base)`}
         />
 
         {/* Inner pocket liner subtle shadow */}
-        <polygon 
-          points="22,22 518,22 270,210" 
-          fill="#DDD4FA" 
-          opacity="0.35" 
+        <polygon
+          points="22,22 518,22 270,210"
+          fill="#DDD4FA"
+          opacity="0.35"
         />
 
         {/* Left folded side */}
-        <polygon 
-          points="12,12 12,358 270,195" 
-          fill={`url(#${gradIdPrefix}-leftFold)`} 
+        <polygon
+          points="12,12 12,358 270,195"
+          fill={`url(#${gradIdPrefix}-leftFold)`}
         />
 
         {/* Right folded side */}
-        <polygon 
-          points="528,12 528,358 270,195" 
-          fill={`url(#${gradIdPrefix}-rightFold)`} 
+        <polygon
+          points="528,12 528,358 270,195"
+          fill={`url(#${gradIdPrefix}-rightFold)`}
         />
 
         {/* Bottom fold */}
-        <polygon 
-          points="12,358 528,358 270,172" 
-          fill={`url(#${gradIdPrefix}-bottomFold)`} 
-          filter={`url(#${gradIdPrefix}-bottomShadow)`} 
+        <polygon
+          points="12,358 528,358 270,172"
+          fill={`url(#${gradIdPrefix}-bottomFold)`}
+          filter={`url(#${gradIdPrefix}-bottomShadow)`}
         />
 
         {/* Fold crease highlight lines */}
@@ -101,10 +101,10 @@ const Envelope = ({ side = 'left' }) => {
         <line x1="528" y1="358" x2="270" y2="172" stroke="rgba(255,255,255,0.7)" strokeWidth="1.5" />
 
         {/* Top triangular flap pointing downward */}
-        <path 
-          d="M 12 12 L 528 12 L 278 226 Q 270 232 262 226 Z" 
-          fill={`url(#${gradIdPrefix}-flap)`} 
-          filter={`url(#${gradIdPrefix}-flapShadow)`} 
+        <path
+          d="M 12 12 L 528 12 L 278 226 Q 270 232 262 226 Z"
+          fill={`url(#${gradIdPrefix}-flap)`}
+          filter={`url(#${gradIdPrefix}-flapShadow)`}
         />
 
         {/* Flap top border subtle specular highlight */}
@@ -141,15 +141,15 @@ const Contact = () => {
         <div className="butter-container header-bar">
           {/* Left Pill Cluster */}
           <div className="header-left-cluster">
-            <Link 
-              to="/" 
+            <Link
+              to="/"
               className="logo-link"
               aria-label="Trackly home"
             >
-              <img 
-                src="/marketing-assets/images/hero/Nav_trackly_logo.png" 
-                alt="Trackly logo" 
-                className="nav-trackly-logo" 
+              <img
+                src="/marketing-assets/images/hero/Nav_trackly_logo.png"
+                alt="Trackly logo"
+                className="nav-trackly-logo"
               />
             </Link>
 
@@ -163,8 +163,8 @@ const Contact = () => {
             </ul>
 
             {/* Three Dots Toggle */}
-            <button 
-              className="menu-toggle-btn" 
+            <button
+              className="menu-toggle-btn"
               aria-label="Toggle menu"
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             >
@@ -218,7 +218,7 @@ const Contact = () => {
             <Link to="/login" className="login-link">
               Login
             </Link>
-            <button 
+            <button
               className="butter-button small"
               onClick={() => navigate('/login')}
             >
@@ -230,7 +230,7 @@ const Contact = () => {
 
       {/* Main Newsletter Hero Canvas */}
       <main className="contact-main">
-        <section 
+        <section
           key={animationKey}
           className="newsletter-card-canvas"
           aria-label="Join our newsletter"
@@ -242,7 +242,7 @@ const Contact = () => {
           <div className="ambient-glow glow-bottom" />
 
           {/* Replay Animation Control */}
-          <button 
+          <button
             className="replay-anim-btn"
             onClick={handleReplay}
             title="Replay appearing animation"
@@ -287,8 +287,8 @@ const Contact = () => {
               {!isSubscribed ? (
                 <div className="cta-container">
                   {!showInput ? (
-                    <button 
-                      type="button" 
+                    <button
+                      type="button"
                       className="join-newsletter-btn"
                       onClick={() => setShowInput(true)}
                     >
@@ -297,8 +297,8 @@ const Contact = () => {
                     </button>
                   ) : (
                     <form className="email-expand-form" onSubmit={handleSubscribe}>
-                      <input 
-                        type="email" 
+                      <input
+                        type="email"
                         className="email-input-field"
                         placeholder="Enter your email address..."
                         value={email}

@@ -60,7 +60,7 @@ export const trackPageDuration = async (req, res) => {
       });
     }
 
-    const seconds = Math.round(duration);
+    const seconds = duration;
 
     const page = await PageAnalyticsModel.findOneAndUpdate(
       { projectId, path },
@@ -106,6 +106,7 @@ export const trackPageDuration = async (req, res) => {
       {
         new: true,
         upsert: true,
+        updatePipeline: true,
       }
     );
 

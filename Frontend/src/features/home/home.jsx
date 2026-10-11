@@ -1,21 +1,21 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import './home.scss';
-import { 
-  Play, 
-  Pause, 
-  ChevronRight, 
-  ChevronLeft, 
-  Sliders, 
-  Code2, 
-  Sparkles, 
-  Layers, 
-  Copy, 
-  Check, 
-  Maximize2, 
-  Volume2, 
-  Compass, 
-  ExternalLink 
+import {
+  Play,
+  Pause,
+  ChevronRight,
+  ChevronLeft,
+  Sliders,
+  Code2,
+  Sparkles,
+  Layers,
+  Copy,
+  Check,
+  Maximize2,
+  Volume2,
+  Compass,
+  ExternalLink
 } from 'lucide-react';
 
 // Brand logos for infinite marquee ticker
@@ -133,7 +133,7 @@ const Home = () => {
   const canvasRef = useRef(null);
 
   // Cursor badge helper no-op
-  const setCursorBadge = () => {};
+  const setCursorBadge = () => { };
 
   // Mouse Listener for Hero Keychain Physics
   useEffect(() => {
@@ -249,17 +249,17 @@ const Home = () => {
         <div className="butter-container header-bar">
           {/* Left Pill Cluster */}
           <div className="header-left-cluster">
-            <a 
-              href="/" 
+            <a
+              href="/"
               className="logo-link"
               aria-label="Trackly home"
               onMouseEnter={() => setCursorBadge('Trackly')}
               onMouseLeave={() => setCursorBadge(null)}
             >
-              <img 
-                src="/marketing-assets/images/hero/Nav_trackly_logo.png" 
-                alt="Trackly logo" 
-                className="nav-trackly-logo" 
+              <img
+                src="/marketing-assets/images/hero/Nav_trackly_logo.png"
+                alt="Trackly logo"
+                className="nav-trackly-logo"
               />
             </a>
 
@@ -273,8 +273,8 @@ const Home = () => {
             </ul>
 
             {/* Three Dots Toggle */}
-            <button 
-              className="menu-toggle-btn" 
+            <button
+              className="menu-toggle-btn"
               aria-label="Toggle menu"
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               onMouseEnter={() => setCursorBadge(isDropdownOpen ? 'Close' : 'Menu')}
@@ -288,7 +288,9 @@ const Home = () => {
 
             {/* Dropdown Panel */}
             {isDropdownOpen && (
-              <div className="header-dropdown-panel">
+              <div className="header-d
+              
+              ropdown-panel">
                 <ul className="dropdown-menu-list">
                   <li className="dropdown-item">
                     <a href="#product" onClick={() => setIsDropdownOpen(false)}>
@@ -334,15 +336,15 @@ const Home = () => {
 
           {/* Right Pill Cluster */}
           <div className="header-right-cluster">
-            <Link 
-              to="/login" 
+            <Link
+              to="/login"
               className="login-link"
               onMouseEnter={() => setCursorBadge('Login')}
               onMouseLeave={() => setCursorBadge(null)}
             >
               Login
             </Link>
-            <button 
+            <button
               className="butter-button small"
               onClick={() => navigate('/login')}
               onMouseEnter={() => setCursorBadge('✨ Free')}
@@ -357,7 +359,7 @@ const Home = () => {
       {/* HERO SECTION */}
       <section className="hero-section">
         {/* Hanging Keychain Charms Rig */}
-        <div 
+        <div
           className="hero-keychain-container"
           onMouseDown={() => setIsDraggingKeychain(true)}
           onMouseUp={() => setIsDraggingKeychain(false)}
@@ -368,8 +370,8 @@ const Home = () => {
           }}
         >
           {/* Fallback image with natural tilt */}
-          <img 
-            src="/marketing-assets/images/hero/hero_fallback_1.png" 
+          <img
+            src="/marketing-assets/images/hero/hero_fallback_1.png"
             alt="Keychain with Trackly branded charms"
             className="hero-fallback-img"
             style={{
@@ -387,9 +389,9 @@ const Home = () => {
           </h1>
           <div className="hero-subcontent">
             <p className="heading-3 hero-subtitle">
-             Trackly, the analytics tool built for deeper insights
+              Trackly, the analytics tool built for deeper insights
             </p>
-            <button 
+            <button
               className="butter-button"
               onClick={() => navigate('/login')}
               onMouseEnter={() => setCursorBadge('Start')}
@@ -447,8 +449,8 @@ const Home = () => {
                 <span className="project-name">Summer_Campaign_Hero_Cut_v04.butter</span>
               </div>
               <div className="header-controls">
-                <button 
-                  className="play-btn" 
+                <button
+                  className="play-btn"
                   onClick={() => setIsPlaying(!isPlaying)}
                   onMouseEnter={() => setCursorBadge(isPlaying ? 'Pause' : 'Play')}
                   onMouseLeave={() => setCursorBadge(null)}
@@ -462,7 +464,7 @@ const Home = () => {
             </div>
 
             {/* Visual Timeline Tracks & Scrubber */}
-            <div 
+            <div
               className="timeline-visual-area"
               onClick={(e) => {
                 const rect = e.currentTarget.getBoundingClientRect();
@@ -473,9 +475,9 @@ const Home = () => {
               onMouseEnter={() => setCursorBadge('Scrub')}
               onMouseLeave={() => setCursorBadge(null)}
             >
-              <img 
-                src="/marketing-assets/images/statement/timeline.png" 
-                alt="Butter timeline tracks" 
+              <img
+                src="/marketing-assets/images/statement/timeline.png"
+                alt="Butter timeline tracks"
                 className="timeline-bg-img"
               />
 
@@ -531,7 +533,7 @@ const Home = () => {
             <div className="story-one-text-col">
               <div className="text-effects-headline-box">
                 <h2 className="heading-1 headline-static">
-                  There’s a block for 
+                  There’s a block for
                   <span className={`active-effect-word ${activeEffect}`}>
                     {activeEffect === 'glow' && (
                       <>
@@ -574,7 +576,7 @@ const Home = () => {
 
                 <div className="studio-effects-grid">
                   {/* Glow Button */}
-                  <div 
+                  <div
                     className={`effect-button-item ${activeEffect === 'glow' ? 'active' : ''}`}
                     onClick={() => setActiveEffect('glow')}
                     onMouseEnter={() => setCursorBadge('Glow')}
@@ -587,7 +589,7 @@ const Home = () => {
                   </div>
 
                   {/* Inflate Button */}
-                  <div 
+                  <div
                     className={`effect-button-item ${activeEffect === 'inflate' ? 'active' : ''}`}
                     onClick={() => setActiveEffect('inflate')}
                     onMouseEnter={() => setCursorBadge('Inflate')}
@@ -600,7 +602,7 @@ const Home = () => {
                   </div>
 
                   {/* Focus Button */}
-                  <div 
+                  <div
                     className={`effect-button-item ${activeEffect === 'focus' ? 'active' : ''}`}
                     onClick={() => setActiveEffect('focus')}
                     onMouseEnter={() => setCursorBadge('Focus')}
@@ -613,7 +615,7 @@ const Home = () => {
                   </div>
 
                   {/* Halftone Button */}
-                  <div 
+                  <div
                     className={`effect-button-item ${activeEffect === 'halftone' ? 'active' : ''}`}
                     onClick={() => setActiveEffect('halftone')}
                     onMouseEnter={() => setCursorBadge('Halftone')}
@@ -678,10 +680,10 @@ const Home = () => {
                     <span>Wave Frequency</span>
                     <span className="slider-val">{sliderAberration} Hz</span>
                   </div>
-                  <input 
-                    type="range" 
-                    min="5" 
-                    max="95" 
+                  <input
+                    type="range"
+                    min="5"
+                    max="95"
                     value={sliderAberration}
                     onChange={(e) => setSliderAberration(Number(e.target.value))}
                   />
@@ -692,10 +694,10 @@ const Home = () => {
                     <span>Extrusion Amplitude</span>
                     <span className="slider-val">{sliderExtrude} px</span>
                   </div>
-                  <input 
-                    type="range" 
-                    min="10" 
-                    max="100" 
+                  <input
+                    type="range"
+                    min="10"
+                    max="100"
                     value={sliderExtrude}
                     onChange={(e) => setSliderExtrude(Number(e.target.value))}
                   />
@@ -706,10 +708,10 @@ const Home = () => {
                     <span>Phase Distortion</span>
                     <span className="slider-val">{sliderWarp}°</span>
                   </div>
-                  <input 
-                    type="range" 
-                    min="0" 
-                    max="100" 
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
                     value={sliderWarp}
                     onChange={(e) => setSliderWarp(Number(e.target.value))}
                   />
@@ -765,7 +767,7 @@ const Home = () => {
                     </div>
 
                     <div className="card-art-preview">
-                      <div 
+                      <div
                         style={{
                           width: '60px',
                           height: '60px',
@@ -807,8 +809,8 @@ const Home = () => {
             {/* Card 1: Import */}
             <div className="feature-card">
               <div className="feature-card-media">
-                <img 
-                  src="https://images.prismic.io/butter/p5SruxZOCU4DwBbv_home-feature-cards-media-1.jpg?auto=format,compress" 
+                <img
+                  src="https://images.prismic.io/butter/p5SruxZOCU4DwBbv_home-feature-cards-media-1.jpg?auto=format,compress"
                   alt="Import media"
                 />
               </div>
@@ -823,8 +825,8 @@ const Home = () => {
             {/* Card 2: Edit */}
             <div className="feature-card">
               <div className="feature-card-media">
-                <img 
-                  src="https://images.prismic.io/butter/0WNNkkhILGsOpBUW_home-features-edit-1-.jpg?auto=format,compress" 
+                <img
+                  src="https://images.prismic.io/butter/0WNNkkhILGsOpBUW_home-features-edit-1-.jpg?auto=format,compress"
                   alt="Edit timeline"
                 />
               </div>
@@ -839,8 +841,8 @@ const Home = () => {
             {/* Card 3: Enhance */}
             <div className="feature-card">
               <div className="feature-card-media">
-                <img 
-                  src="https://images.prismic.io/butter/vUiREZ54JrqHgkMt_enhance-1-.jpg?auto=format,compress" 
+                <img
+                  src="https://images.prismic.io/butter/vUiREZ54JrqHgkMt_enhance-1-.jpg?auto=format,compress"
                   alt="Enhance video"
                 />
               </div>
@@ -855,8 +857,8 @@ const Home = () => {
             {/* Card 4: Ship */}
             <div className="feature-card">
               <div className="feature-card-media">
-                <img 
-                  src="https://images.prismic.io/butter/it6UwH2L33bJ8Jfa_home-feature-cards-media-4.jpg?auto=format,compress" 
+                <img
+                  src="https://images.prismic.io/butter/it6UwH2L33bJ8Jfa_home-feature-cards-media-4.jpg?auto=format,compress"
                   alt="Ship formats"
                 />
               </div>
@@ -881,8 +883,8 @@ const Home = () => {
 
               {/* Tab 1: Remix */}
               <div className={`accordion-item ${highlightTab === 0 ? 'active' : ''}`}>
-                <button 
-                  className="accordion-trigger" 
+                <button
+                  className="accordion-trigger"
                   onClick={() => setHighlightTab(0)}
                   onMouseEnter={() => setCursorBadge('Remix')}
                   onMouseLeave={() => setCursorBadge(null)}
@@ -899,8 +901,8 @@ const Home = () => {
 
               {/* Tab 2: Describe */}
               <div className={`accordion-item ${highlightTab === 1 ? 'active' : ''}`}>
-                <button 
-                  className="accordion-trigger" 
+                <button
+                  className="accordion-trigger"
                   onClick={() => setHighlightTab(1)}
                   onMouseEnter={() => setCursorBadge('Prompt')}
                   onMouseLeave={() => setCursorBadge(null)}
@@ -917,8 +919,8 @@ const Home = () => {
 
               {/* Tab 3: Code */}
               <div className={`accordion-item ${highlightTab === 2 ? 'active' : ''}`}>
-                <button 
-                  className="accordion-trigger" 
+                <button
+                  className="accordion-trigger"
                   onClick={() => setHighlightTab(2)}
                   onMouseEnter={() => setCursorBadge('GLSL')}
                   onMouseLeave={() => setCursorBadge(null)}
@@ -937,21 +939,21 @@ const Home = () => {
             {/* Media Preview Column */}
             <div className="highlight-media-col">
               <div className={`highlight-media-item ${highlightTab === 0 ? 'active' : ''}`}>
-                <img 
-                  src="https://images.prismic.io/butter/P8K5Uwru4pdZwAgz_remix-2-.jpg?auto=format,compress" 
-                  alt="Remix mode" 
+                <img
+                  src="https://images.prismic.io/butter/P8K5Uwru4pdZwAgz_remix-2-.jpg?auto=format,compress"
+                  alt="Remix mode"
                 />
               </div>
               <div className={`highlight-media-item ${highlightTab === 1 ? 'active' : ''}`}>
-                <img 
-                  src="https://images.prismic.io/butter/hDrohuQJDf2bxDhq_home-features-highlight-2.jpg?auto=format,compress" 
-                  alt="Describe mode" 
+                <img
+                  src="https://images.prismic.io/butter/hDrohuQJDf2bxDhq_home-features-highlight-2.jpg?auto=format,compress"
+                  alt="Describe mode"
                 />
               </div>
               <div className={`highlight-media-item ${highlightTab === 2 ? 'active' : ''}`}>
-                <img 
-                  src="https://images.prismic.io/butter/0JUbdPAYldT9Ehje_home-features-highlight-3.jpg?auto=format,compress" 
-                  alt="Code mode" 
+                <img
+                  src="https://images.prismic.io/butter/0JUbdPAYldT9Ehje_home-features-highlight-3.jpg?auto=format,compress"
+                  alt="Code mode"
                 />
               </div>
             </div>
@@ -970,15 +972,15 @@ const Home = () => {
           <div className="carousel-container-outer">
             {/* Nav Arrows */}
             <div className="carousel-nav-arrows">
-              <button 
-                className="nav-btn" 
+              <button
+                className="nav-btn"
                 onClick={() => scrollGallery('left')}
                 aria-label="Previous template"
               >
                 <ChevronLeft size={20} />
               </button>
-              <button 
-                className="nav-btn" 
+              <button
+                className="nav-btn"
                 onClick={() => scrollGallery('right')}
                 aria-label="Next template"
               >
@@ -989,8 +991,8 @@ const Home = () => {
             {/* Draggable Scroll Track */}
             <div className="carousel-scroll-track" ref={carouselTrackRef}>
               {GALLERY_TEMPLATES.map((tmpl) => (
-                <div 
-                  key={tmpl.id} 
+                <div
+                  key={tmpl.id}
                   className="carousel-card-item"
                   onMouseEnter={() => setCursorBadge('Use')}
                   onMouseLeave={() => setCursorBadge(null)}
@@ -1017,9 +1019,9 @@ const Home = () => {
             <div className="double-card">
               <h3 className="card-top-title">Turn anything into everything.</h3>
               <div className="card-center-art">
-                <img 
-                  src="https://images.prismic.io/butter/ai_Er41P9HI4UgL7_turn-anything.png?auto=format,compress" 
-                  alt="Turn anything into everything" 
+                <img
+                  src="https://images.prismic.io/butter/ai_Er41P9HI4UgL7_turn-anything.png?auto=format,compress"
+                  alt="Turn anything into everything"
                 />
               </div>
               <p className="card-bottom-copy">
@@ -1031,9 +1033,9 @@ const Home = () => {
             <div className="double-card">
               <h3 className="card-top-title">High performance. Totally programmable.</h3>
               <div className="card-center-art">
-                <img 
-                  src="https://images.prismic.io/butter/ai_E3Y1P9HI4UgMC_high-performance.png?auto=format,compress" 
-                  alt="High performance programmable" 
+                <img
+                  src="https://images.prismic.io/butter/ai_E3Y1P9HI4UgMC_high-performance.png?auto=format,compress"
+                  alt="High performance programmable"
                 />
               </div>
               <p className="card-bottom-copy">
@@ -1070,9 +1072,9 @@ const Home = () => {
             {/* Right: Creator Preview Banner and Thumbs */}
             <div className="creator-preview-col">
               <div className="creator-banner-img">
-                <img 
-                  src={CREATORS[selectedCreator].banner} 
-                  alt={CREATORS[selectedCreator].name} 
+                <img
+                  src={CREATORS[selectedCreator].banner}
+                  alt={CREATORS[selectedCreator].name}
                 />
               </div>
 
@@ -1144,9 +1146,9 @@ const Home = () => {
 
           {/* Giant Illuminated Trackly SVG Wordmark */}
           <div className="footer-giant-logo-wrap">
-            <img 
-              src="/marketing-assets/images/footer-logo.svg" 
-              alt="Trackly logo graphic" 
+            <img
+              src="/marketing-assets/images/footer-logo.svg"
+              alt="Trackly logo graphic"
               className="footer-logo-svg"
             />
           </div>

@@ -93,7 +93,6 @@ function getDevice() {
 if (window.name === "trackly_session") {
   console.log("✅ Existing Trackly session - NO VISIT");
 } else {
-
   // Create session for this tab
   window.name = "trackly_session";
 
@@ -130,7 +129,6 @@ if (window.name === "trackly_session") {
       console.error("❌ Trackly error:", error);
     });
 }
-
 
 // ------------------------------------
 // Trackly Error, Warning & Console Logs
@@ -207,7 +205,7 @@ window.addEventListener("error", (event) => {
   if (event.message) {
     sendErrorLog(
       "error",
-      `${event.message} (${event.filename || "unknown file"}:${event.lineno || 0})`
+      `${event.message} (${event.filename || "unknown file"}:${event.lineno || 0})`,
     );
   }
 });
@@ -224,3 +222,239 @@ window.addEventListener("unhandledrejection", (event) => {
   sendErrorLog("error", `Unhandled Promise Rejection: ${message}`);
 });
 
+
+// ------------------------------------
+// Trackly Page Analytics (SPA + Normal Websites)
+// ------------------------------------
+
+const PAGE_VIEW_API_URL =
+  "http://localhost:3000/api/page-analytics/view";
+
+const PAGE_DURATION_API_URL =
+  "http://localhost:3000/api/page-analytics/duration";
+
+// Current page state
+let currentPagePath = getTracklyPagePath();
+let currentPageTitle = document.title;
+
+let activeStartTime =
+  document.visibilityState === "visible"
+    ? performance.now()
+    : null;
+
+let totalActiveMilliseconds = 0;
+let durationSent = false;
+
+// ------------------------------------
+// Get Current Page Path
+// ------------------------------------
+
+function getTracklyPagePath() {
+  const pathname = window.location.pathname;
+  const hash = window.location.hash;
+
+  // Support common hash-based SPA routes:
+  // /#/dashboard or /#!/dashboard
+  if (hash.startsWith("#/") || hash.startsWith("#!")) {
+    return pathname + hash;
+  }
+
+  return pathname;
+}
+
+// ------------------------------------
+// Track Page View
+// ------------------------------------
+
+function trackPageView(path, title) {
+  fetch(PAGE_VIEW_API_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      projectId: PROJECT_ID,
+      path: path,
+      pageTitle: title,
+    }),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+
+      return response.json();
+    })
+    .then((data) => {
+      console.log("📄 Trackly page view:", data);
+    })
+    .catch((error) => {
+      console.error("Trackly page view failed:", error);
+    });
+}
+
+// ------------------------------------
+// Pause Active Time
+// ------------------------------------
+
+function pauseActiveTime() {
+  if (activeStartTime !== null) {
+    totalActiveMilliseconds +=
+      performance.now() - activeStartTime;
+
+    activeStartTime = null;
+  }
+}
+
+// ------------------------------------
+// Resume Active Time
+// ------------------------------------
+
+function resumeActiveTime() {
+  if (
+    activeStartTime === null &&
+    !durationSent &&
+    document.visibilityState === "visible"
+  ) {
+    activeStartTime = performance.now();
+  }
+}
+
+// ------------------------------------
+// Send Current Page Duration
+// ------------------------------------
+
+function sendCurrentPageDuration() {
+  if (durationSent) return;
+
+  pauseActiveTime();
+  durationSent = true;
+
+  const duration = totalActiveMilliseconds / 1000;
+
+  const payload = JSON.stringify({
+    projectId: PROJECT_ID,
+    path: currentPagePath,
+    pageTitle: currentPageTitle,
+    duration: duration,
+  });
+
+  const blob = new Blob([payload], {
+    type: "application/json",
+  });
+
+  const queued = navigator.sendBeacon(
+    PAGE_DURATION_API_URL,
+    blob
+  );
+
+  if (!queued) {
+    fetch(PAGE_DURATION_API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: payload,
+      keepalive: true,
+    }).catch((error) => {
+      console.error("Trackly duration failed:", error);
+    });
+  }
+
+  console.log(
+    "⏱️ Trackly page duration:",
+    currentPagePath,
+    duration,
+    "seconds"
+  );
+}
+
+// ------------------------------------
+// Start Tracking a New Page
+// ------------------------------------
+
+function startTrackingPage() {
+  const newPath = getTracklyPagePath();
+
+  // Ignore duplicate notifications for the same page
+  if (newPath === currentPagePath) return;
+
+  // Finish timing for the previous page
+  sendCurrentPageDuration();
+
+  // Initialize the new page
+  currentPagePath = newPath;
+  currentPageTitle = document.title;
+
+  totalActiveMilliseconds = 0;
+  durationSent = false;
+
+  activeStartTime =
+    document.visibilityState === "visible"
+      ? performance.now()
+      : null;
+
+  console.log("📄 Trackly navigated to:", currentPagePath);
+
+  // Record a view for the new page
+  trackPageView(currentPagePath, currentPageTitle);
+}
+
+// ------------------------------------
+// Detect SPA Navigation
+// ------------------------------------
+
+function handleLocationChange() {
+  // Let the framework update the document title first
+  setTimeout(() => {
+    startTrackingPage();
+  }, 0);
+}
+
+// Listen for browser Back / Forward navigation
+window.addEventListener("popstate", handleLocationChange);
+
+// Listen for hash-based navigation
+window.addEventListener("hashchange", handleLocationChange);
+
+// Detect React Router and other History API navigation
+const originalPushState = history.pushState;
+const originalReplaceState = history.replaceState;
+
+history.pushState = function (...args) {
+  const result = originalPushState.apply(this, args);
+  handleLocationChange();
+  return result;
+};
+
+history.replaceState = function (...args) {
+  const result = originalReplaceState.apply(this, args);
+  handleLocationChange();
+  return result;
+};
+
+// ------------------------------------
+// Handle Tab Visibility
+// ------------------------------------
+
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "hidden") {
+    pauseActiveTime();
+  } else {
+    resumeActiveTime();
+  }
+});
+
+// ------------------------------------
+// Handle Page Exit
+// ------------------------------------
+
+window.addEventListener("pagehide", () => {
+  sendCurrentPageDuration();
+});
+
+// ------------------------------------
+// Initial Page View
+// ------------------------------------
+
+trackPageView(currentPagePath, currentPageTitle);
