@@ -6,6 +6,8 @@ import analyticsRouter from "./routes/analytics.routes.js";
 import projectRouter from './routes/project.routes.js';
 import errorLogRouter from './routes/errorLog.routes.js';
 import pageAnalyticsRouter from './routes/pageAnalytics.routes.js';
+import userFlowAnalyticsRouter from './routes/userFlowAnalytics.routes.js';
+
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
@@ -27,5 +29,7 @@ app.use('/api/analytics',analyticsRouter);
 app.use("/api/error-logs", errorLogRouter);
 //page analysis api
 app.use('/api/page-analytics',pageAnalyticsRouter);
+//user flow api
+app.use('/api/user-flows',userFlowAnalyticsRouter);
 
 export default app;
