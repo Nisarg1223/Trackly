@@ -266,8 +266,8 @@ const Home = () => {
             {/* Menu links */}
             <ul className="header-nav-menu">
               <li className="nav-item"><a href="#features">Product</a></li>
+              <li className="nav-item"><Link to="/about">About Us</Link></li>
               <li className="nav-item"><Link to="/contact">Contact</Link></li>
-              <li className="nav-item"><a href="#templates">Templates</a></li>
               <li className="nav-item"><a href="#pricing">Pricing</a></li>
               <li className="nav-item"><a href="#blog">Blog</a></li>
             </ul>
@@ -305,10 +305,10 @@ const Home = () => {
                     </Link>
                   </li>
                   <li className="dropdown-item">
-                    <a href="#templates" onClick={() => setIsDropdownOpen(false)}>
-                      <span className="item-label">Templates</span>
-                      <span className="item-hint">Start with a template</span>
-                    </a>
+                    <Link to="/about" onClick={() => setIsDropdownOpen(false)}>
+                      <span className="item-label">About Us</span>
+                      <span className="item-hint">Our story & vision</span>
+                    </Link>
                   </li>
                   <li className="dropdown-item">
                     <a href="#pricing" onClick={() => setIsDropdownOpen(false)}>
@@ -1108,7 +1108,7 @@ const Home = () => {
               <ul className="col-links">
                 <li><a href="#product">Product</a></li>
                 <li><a href="#blocks">Blocks</a></li>
-                <li><a href="#templates">Templates</a></li>
+                <li><Link to="/about">About Us</Link></li>
                 <li><a href="#pricing">Pricing</a></li>
                 <li><Link to="/login">Login</Link></li>
               </ul>

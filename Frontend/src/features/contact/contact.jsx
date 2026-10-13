@@ -156,8 +156,8 @@ const Contact = () => {
             {/* Menu links - Contact is active */}
             <ul className="header-nav-menu">
               <li className="nav-item"><Link to="/#features">Product</Link></li>
+              <li className="nav-item"><Link to="/about">About Us</Link></li>
               <li className="nav-item active"><Link to="/contact">Contact</Link></li>
-              <li className="nav-item"><Link to="/#templates">Templates</Link></li>
               <li className="nav-item"><Link to="/#pricing">Pricing</Link></li>
               <li className="nav-item"><Link to="/#blog">Blog</Link></li>
             </ul>
@@ -184,16 +184,16 @@ const Contact = () => {
                       <span className="item-hint">Explore features</span>
                     </Link>
                   </li>
+                  <li className="dropdown-item">
+                    <Link to="/about" onClick={() => setIsDropdownOpen(false)}>
+                      <span className="item-label">About Us</span>
+                      <span className="item-hint">Our story & vision</span>
+                    </Link>
+                  </li>
                   <li className="dropdown-item active">
                     <Link to="/contact" onClick={() => setIsDropdownOpen(false)}>
                       <span className="item-label">Contact</span>
                       <span className="item-hint">Join newsletter & stay updated</span>
-                    </Link>
-                  </li>
-                  <li className="dropdown-item">
-                    <Link to="/#templates" onClick={() => setIsDropdownOpen(false)}>
-                      <span className="item-label">Templates</span>
-                      <span className="item-hint">Start with a template</span>
                     </Link>
                   </li>
                   <li className="dropdown-item">

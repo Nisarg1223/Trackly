@@ -1,0 +1,499 @@
+/* ==========================================================================
+   Lunora / Trackly - About Us Page Styles
+   Matching exact UI mockup: Starlit celestial hero with floral nocturnal study
+   High-impact, large typography and prominent buttons
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --about-font-serif: 'Instrument Serif', 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  --about-font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --about-bg-midnight: #0b1526;
+  --about-text-glow: rgba(255, 255, 255, 0.98);
+  --about-text-subtle: rgba(224, 236, 248, 0.85);
+  --about-pill-border: rgba(255, 255, 255, 0.35);
+  --about-pill-bg: rgba(255, 255, 255, 0.09);
+}
+
+/* --------------------------------------------------------------------------
+   Outer Canvas Wrapper
+   -------------------------------------------------------------------------- */
+.about-canvas-wrapper {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  min-height: 100dvh;
+  height: 100vh;
+  height: 100dvh;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: var(--about-bg-midnight);
+  background-image: url('/marketing-assets/images/hero/about_page.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center bottom;
+  color: #ffffff;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-family: var(--about-font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --------------------------------------------------------------------------
+   Subtle Starlight Twinkle Animation Layer
+   -------------------------------------------------------------------------- */
+.starlight-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60%;
+  pointer-events: none;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.star-sparkle {
+  position: absolute;
+  border-radius: 50%;
+  background-color: #ffffff;
+  box-shadow: 0 0 6px 1px rgba(255, 255, 255, 0.8), 0 0 12px 2px rgba(160, 210, 255, 0.5);
+  opacity: 0.35;
+  animation: starPulse 4s infinite ease-in-out;
+}
+
+.star-1 { top: 12%; left: 18%; width: 3px; height: 3px; animation-delay: 0s; }
+.star-2 { top: 22%; left: 32%; width: 4px; height: 4px; animation-delay: 1.2s; }
+.star-3 { top: 15%; left: 78%; width: 3.5px; height: 3.5px; animation-delay: 0.7s; }
+.star-4 { top: 38%; left: 88%; width: 3px; height: 3px; animation-delay: 2.4s; }
+.star-5 { top: 8%; left: 62%; width: 4px; height: 4px; animation-delay: 1.8s; }
+.star-6 { top: 30%; left: 12%; width: 3px; height: 3px; animation-delay: 3.1s; }
+.star-7 { top: 26%; left: 45%; width: 2.5px; height: 2.5px; animation-delay: 2s; }
+.star-8 { top: 18%; left: 92%; width: 3px; height: 3px; animation-delay: 3.7s; }
+
+@keyframes starPulse {
+  0%, 100% {
+    opacity: 0.25;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.4);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Top Navigation Bar
+   -------------------------------------------------------------------------- */
+.about-header {
+  position: relative;
+  z-index: 30;
+  width: 100%;
+  padding: 3.5rem 5.5rem 2rem 5.5rem; /* More generous vertical presence */
+  box-sizing: border-box;
+}
+
+.about-nav-container {
+  max-width: 1840px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Brand Logo (Lunora®) */
+.about-brand-logo {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: flex-start;
+  color: #ffffff;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.about-brand-logo:hover {
+  opacity: 0.9;
+  transform: translateY(-0.5px);
+}
+
+.brand-name {
+  font-family: var(--about-font-serif);
+  font-size: 3.85rem; /* Significantly larger, prominent logo */
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  line-height: 1;
+  text-shadow: 0 0 24px rgba(255, 255, 255, 0.38);
+}
+
+.brand-reg {
+  font-family: var(--about-font-sans);
+  font-size: 1.15rem;
+  font-weight: 400;
+  position: relative;
+  top: 0.35rem;
+  margin-left: 0.3rem;
+  opacity: 0.9;
+}
+
+/* Desktop Navigation Menu Links */
+.about-nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 4.5rem; /* Generous prominent spacing between nav items */
+  margin: 0;
+  padding: 0;
+}
+
+.about-nav-menu .nav-item {
+  font-family: var(--about-font-sans);
+  font-size: 1.65rem; /* Large, bold, clearly legible navbar typography */
+  font-weight: 450;
+  color: rgba(255, 255, 255, 0.82);
+  text-decoration: none;
+  letter-spacing: 0.015em;
+  padding: 0.4rem 0.3rem;
+  position: relative;
+  transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+
+.about-nav-menu .nav-item:hover {
+  color: #ffffff;
+  text-shadow: 0 0 16px rgba(255, 255, 255, 0.65);
+}
+
+.about-nav-menu .nav-item.active {
+  color: #ffffff;
+  font-weight: 550;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
+}
+
+/* Nav Actions & Start Creating Button */
+.about-nav-action {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* Shared Pill Button Styling */
+.about-pill-btn {
+  font-family: var(--about-font-sans);
+  color: #ffffff;
+  background: var(--about-pill-bg);
+  border: 2px solid var(--about-pill-border);
+  border-radius: 9999px;
+  cursor: pointer;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+.about-pill-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.65);
+  box-shadow: 0 0 28px rgba(255, 255, 255, 0.22);
+  transform: translateY(-2px);
+}
+
+.about-pill-btn:active {
+  transform: translateY(0);
+}
+
+/* Nav specific pill button */
+.nav-btn {
+  font-size: 1.45rem; /* Larger, prominent pill button */
+  font-weight: 500;
+  padding: 1.05rem 3.1rem;
+  letter-spacing: 0.015em;
+}
+
+/* Mobile Toggle Hamburger */
+.about-mobile-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 22px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 40;
+}
+
+.hamburger-bar {
+  width: 100%;
+  height: 3px;
+  background-color: #ffffff;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.hamburger-bar.open:nth-child(1) {
+  transform: translateY(9.5px) rotate(45deg);
+}
+
+.hamburger-bar.open:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-bar.open:nth-child(3) {
+  transform: translateY(-9.5px) rotate(-45deg);
+}
+
+/* Mobile Menu Dropdown */
+.about-mobile-menu {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
+   Hero Stage (Central Editorial Text & CTA)
+   -------------------------------------------------------------------------- */
+.about-hero-stage {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  padding: 2.75rem 2rem 0 2rem;
+  box-sizing: border-box;
+}
+
+.about-hero-box {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Main Editorial Headline */
+.about-hero-headline {
+  font-family: var(--about-font-serif);
+  font-size: clamp(4.2rem, 6.2vw, 6.4rem); /* Large, majestic, high-visibility */
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.018em;
+  color: #edf2f7;
+  margin: 0 0 1.65rem 0;
+  padding: 0;
+  text-align: center;
+  white-space: nowrap; /* Stays proudly on one line on desktop */
+  text-shadow: 0 4px 35px rgba(0, 0, 0, 0.5), 0 0 65px rgba(255, 255, 255, 0.2);
+  animation: starlightFadeIn 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Subtitle Copy */
+.about-hero-subtext {
+  font-family: var(--about-font-sans);
+  font-size: clamp(1.2rem, 1.6vw, 1.45rem); /* ~20px to ~23px */
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--about-text-subtle);
+  max-width: 820px;
+  margin: 0 auto 2.75rem auto;
+  text-align: center;
+  letter-spacing: 0.01em;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.8);
+  animation: starlightFadeIn 1.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Center Call to Action Pill Button */
+.about-hero-action {
+  animation: starlightFadeIn 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hero-cta-btn {
+  font-size: 1.3rem; /* ~21px */
+  font-weight: 500;
+  padding: 1.15rem 3.6rem;
+  letter-spacing: 0.02em;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.hero-cta-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 14px 44px rgba(0, 0, 0, 0.5), 0 0 35px rgba(255, 255, 255, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  transform: translateY(-2.5px) scale(1.03);
+}
+
+/* --------------------------------------------------------------------------
+   Bottom Spacer Anchor
+   Leaves breathing room for the students and glowing flowers at the bottom
+   -------------------------------------------------------------------------- */
+.about-bottom-anchor {
+  width: 100%;
+  height: 20vh;
+  min-height: 120px;
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   Animations
+   -------------------------------------------------------------------------- */
+@keyframes starlightFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Adaptations
+   -------------------------------------------------------------------------- */
+@media (max-width: 1400px) {
+  .about-hero-headline {
+    font-size: clamp(3.6rem, 5.5vw, 5.2rem);
+  }
+
+  .about-hero-subtext {
+    font-size: 1.2rem;
+    max-width: 740px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .about-header {
+    padding: 2.25rem 3rem 1.25rem 3rem;
+  }
+
+  .about-nav-menu {
+    gap: 2.5rem;
+  }
+
+  .about-hero-headline {
+    white-space: normal;
+  }
+}
+
+@media (max-width: 992px) {
+  .about-header {
+    padding: 1.75rem 2.25rem 1rem 2.25rem;
+  }
+
+  .about-nav-menu {
+    gap: 2rem;
+  }
+
+  .brand-name {
+    font-size: 2.4rem;
+  }
+
+  .about-hero-stage {
+    padding-top: 2.5rem;
+  }
+
+  .about-hero-headline {
+    font-size: 3.4rem;
+    white-space: normal;
+  }
+
+  .about-bottom-anchor {
+    height: 16vh;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-canvas-wrapper {
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+  }
+
+  .about-header {
+    padding: 1.5rem 1.5rem 1rem 1.5rem;
+  }
+
+  .about-nav-menu {
+    display: none;
+  }
+
+  .nav-btn {
+    display: none;
+  }
+
+  .about-mobile-toggle {
+    display: flex;
+  }
+
+  .about-mobile-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    position: absolute;
+    top: 100%;
+    left: 1.5rem;
+    right: 1.5rem;
+    background: rgba(11, 21, 38, 0.94);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    padding: 1.75rem 1.5rem;
+    margin-top: 0.5rem;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+    z-index: 50;
+    animation: starlightFadeIn 0.25s ease-out forwards;
+  }
+
+  .about-mobile-menu a {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    font-size: 1.25rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+
+  .about-mobile-menu a:hover,
+  .about-mobile-menu a.active {
+    color: #ffffff;
+  }
+
+  .mobile-cta-btn {
+    width: 100%;
+    padding: 1rem 1.75rem;
+    font-size: 1.15rem;
+    margin-top: 0.5rem;
+  }
+
+  .about-hero-stage {
+    padding-top: 2rem;
+  }
+
+  .about-hero-headline {
+    font-size: 2.75rem;
+    line-height: 1.18;
+    white-space: normal;
+  }
+
+  .about-hero-subtext {
+    font-size: 1.05rem;
+    padding: 0 0.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .hero-cta-btn {
+    padding: 1rem 2.6rem;
+    font-size: 1.1rem;
+  }
+
+  .about-bottom-anchor {
+    height: 160px;
+  }
+}
