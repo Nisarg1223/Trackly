@@ -1,7 +1,7 @@
 const PROJECT_ID = "6ac630236570f2bfa58ce611";
 
 const API_URL = "http://localhost:3000/api/analytics/visit";
-
+const PERFORMANCE_API_URL = "http://localhost:3000/api/performance";
 // ------------------------------------
 // Detect Browser
 // ------------------------------------
@@ -458,3 +458,56 @@ window.addEventListener("pagehide", () => {
 // ------------------------------------
 
 trackPageView(currentPagePath, currentPageTitle);
+
+
+
+// ------------------------------------
+// Track Website Load Performance
+// ------------------------------------
+
+function trackWebsitePerformance() {
+  const navigationEntry = performance.getEntriesByType("navigation")[0];
+
+  if (!navigationEntry || navigationEntry.loadEventEnd <= 0) {
+    return;
+  }
+
+  const loadTime = Math.round(
+    navigationEntry.loadEventEnd - navigationEntry.startTime
+  );
+
+  console.log("⚡ Trackly website load time:", loadTime, "ms");
+
+  fetch(PERFORMANCE_API_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      projectId: PROJECT_ID,
+      loadTime: loadTime,
+    }),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+
+      return response.json();
+    })
+    .then((data) => {
+      console.log("⚡ Trackly performance recorded:", data);
+    })
+    .catch((error) => {
+      console.error("Trackly performance failed:", error);
+    });
+}
+
+// Wait until the complete page load event has finished
+if (document.readyState === "complete") {
+  trackWebsitePerformance();
+} else {
+  window.addEventListener("load", trackWebsitePerformance, {
+    once: true,
+  });
+}

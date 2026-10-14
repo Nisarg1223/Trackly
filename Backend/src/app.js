@@ -7,6 +7,7 @@ import projectRouter from './routes/project.routes.js';
 import errorLogRouter from './routes/errorLog.routes.js';
 import pageAnalyticsRouter from './routes/pageAnalytics.routes.js';
 import userFlowAnalyticsRouter from './routes/userFlowAnalytics.routes.js';
+import performanceRouter from './routes/performance.routes.js';
 
 const app = express();
 app.use(express.json());
@@ -31,5 +32,6 @@ app.use("/api/error-logs", errorLogRouter);
 app.use('/api/page-analytics',pageAnalyticsRouter);
 //user flow api
 app.use('/api/user-flows',userFlowAnalyticsRouter);
-
+//performance api
+app.use("/api/performance", performanceRouter);
 export default app;
