@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import './contact.scss';
 import { RotateCcw, Check } from 'lucide-react';
@@ -117,6 +117,29 @@ const Envelope = ({ side = 'left' }) => {
 const Contact = () => {
   const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    if (isDropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('keydown', handleKeyDown);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isDropdownOpen]);
   const [animationKey, setAnimationKey] = useState(0);
   const [email, setEmail] = useState('');
   const [showInput, setShowInput] = useState(false);
@@ -140,7 +163,7 @@ const Contact = () => {
       <header className="butter-header">
         <div className="butter-container header-bar">
           {/* Left Pill Cluster */}
-          <div className="header-left-cluster">
+          <div className="header-left-cluster" ref={dropdownRef}>
             <Link
               to="/"
               className="logo-link"
@@ -155,7 +178,7 @@ const Contact = () => {
 
             {/* Menu links - Contact is active */}
             <ul className="header-nav-menu">
-              <li className="nav-item"><Link to="/#features">Product</Link></li>
+              <li className="nav-item"><Link to="/#product">Product</Link></li>
               <li className="nav-item"><Link to="/about">About Us</Link></li>
               <li className="nav-item active"><Link to="/contact">Contact</Link></li>
               <li className="nav-item"><Link to="/#pricing">Pricing</Link></li>
@@ -164,7 +187,7 @@ const Contact = () => {
 
             {/* Three Dots Toggle */}
             <button
-              className="menu-toggle-btn"
+              className={`menu-toggle-btn ${isDropdownOpen ? 'active' : ''}`}
               aria-label="Toggle menu"
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             >

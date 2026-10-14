@@ -503,11 +503,17 @@ function trackWebsitePerformance() {
     });
 }
 
-// Wait until the complete page load event has finished
+
+function runPerformanceTracking() {
+  setTimeout(() => {
+    trackWebsitePerformance();
+  }, 0);
+}
+
 if (document.readyState === "complete") {
-  trackWebsitePerformance();
+  runPerformanceTracking();
 } else {
-  window.addEventListener("load", trackWebsitePerformance, {
+  window.addEventListener("load", runPerformanceTracking, {
     once: true,
   });
 }

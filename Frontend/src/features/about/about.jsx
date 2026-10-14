@@ -35,7 +35,7 @@ const About = () => {
       <header className="about-header">
         <div className="about-nav-container">
           {/* Brand Logo */}
-          <Link to="/" className="about-brand-logo" aria-label="Lunora Home">
+          <Link to="/" className="about-brand-logo" aria-label="Trackly Home">
             <span className="brand-name">Trackly</span>
             <sup className="brand-reg">®</sup>
           </Link>
@@ -43,7 +43,7 @@ const About = () => {
           {/* Desktop Navigation Links */}
           <nav className="about-nav-menu" aria-label="Main Navigation">
             <Link to="/" className="nav-item">Home</Link>
-            <a href="/#features" className="nav-item">Product</a>
+            <a href="/#product" className="nav-item">Product</a>
             <Link to="/about" className="nav-item active" aria-current="page">About</Link>
             <a href="/#blog" className="nav-item">Blog</a>
             <Link to="/contact" className="nav-item">Contact</Link>
@@ -79,7 +79,7 @@ const About = () => {
         {mobileMenuOpen && (
           <div className="about-mobile-menu">
             <Link to="/" onClick={() => setMobileMenuOpen(false)}>Home</Link>
-            <a href="/#features" onClick={() => setMobileMenuOpen(false)}>Product</a>
+            <a href="/#product" onClick={() => setMobileMenuOpen(false)}>Product</a>
             <Link to="/about" className="active" onClick={() => setMobileMenuOpen(false)}>About</Link>
             <a href="/#blog" onClick={() => setMobileMenuOpen(false)}>Blog</a>
             <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>Contact</Link>

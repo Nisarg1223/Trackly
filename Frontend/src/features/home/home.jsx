@@ -97,6 +97,29 @@ const Home = () => {
 
   // Navigation Dropdown State
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    if (isDropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('keydown', handleKeyDown);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isDropdownOpen]);
 
   // Hero Keychain Swing Physics State
   const [keychainAngle, setKeychainAngle] = useState(0);
@@ -248,7 +271,7 @@ const Home = () => {
       <header className="butter-header">
         <div className="butter-container header-bar">
           {/* Left Pill Cluster */}
-          <div className="header-left-cluster">
+          <div className="header-left-cluster" ref={dropdownRef}>
             <a
               href="/"
               className="logo-link"
@@ -265,7 +288,7 @@ const Home = () => {
 
             {/* Menu links */}
             <ul className="header-nav-menu">
-              <li className="nav-item"><a href="#features">Product</a></li>
+              <li className="nav-item"><a href="#product">Product</a></li>
               <li className="nav-item"><Link to="/about">About Us</Link></li>
               <li className="nav-item"><Link to="/contact">Contact</Link></li>
               <li className="nav-item"><a href="#pricing">Pricing</a></li>
@@ -274,7 +297,7 @@ const Home = () => {
 
             {/* Three Dots Toggle */}
             <button
-              className="menu-toggle-btn"
+              className={`menu-toggle-btn ${isDropdownOpen ? 'active' : ''}`}
               aria-label="Toggle menu"
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               onMouseEnter={() => setCursorBadge(isDropdownOpen ? 'Close' : 'Menu')}
@@ -288,9 +311,7 @@ const Home = () => {
 
             {/* Dropdown Panel */}
             {isDropdownOpen && (
-              <div className="header-d
-              
-              ropdown-panel">
+              <div className="header-dropdown-panel">
                 <ul className="dropdown-menu-list">
                   <li className="dropdown-item">
                     <a href="#product" onClick={() => setIsDropdownOpen(false)}>
@@ -328,7 +349,7 @@ const Home = () => {
                   <a href="https://instagram.com" target="_blank" rel="noreferrer">Instagram</a>
                   <a href="https://youtube.com" target="_blank" rel="noreferrer">YouTube</a>
                   <a href="https://x.com" target="_blank" rel="noreferrer">X</a>
-                  <a href="#blog">Blog</a>
+                  <a href="#blog" onClick={() => setIsDropdownOpen(false)}>Blog</a>
                 </div>
               </div>
             )}

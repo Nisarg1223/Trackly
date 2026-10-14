@@ -54,12 +54,12 @@
 
 @keyframes accordionExpand {
   from {
-    max-height: 0;
     opacity: 0;
+    transform: translateY(-8px) scale(0.98);
   }
   to {
-    max-height: 300px;
     opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
 
@@ -328,7 +328,8 @@
         padding: 0;
         transition: background-color 0.2s ease;
 
-        &:hover {
+        &:hover,
+        &.active {
           background-color: var(--butter-dark-grey);
         }
 
@@ -344,6 +345,7 @@
         left: 0;
         width: 100%;
         min-width: 320px;
+        max-width: calc(100vw - 3.2rem);
         background-color: var(--butter-light-grey);
         border-radius: 1.6rem;
         padding: 2rem 2.4rem 2.2rem 2.4rem;
@@ -352,7 +354,7 @@
         flex-direction: column;
         gap: 1.8rem;
         transform-origin: top left;
-        animation: accordionExpand 0.3s cubic-bezier(0.2, 0.715, 0.205, 0.99) forwards;
+        animation: accordionExpand 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         z-index: 100;
 
         .dropdown-menu-list {
@@ -360,6 +362,8 @@
           display: flex;
           flex-direction: column;
           gap: 1.2rem;
+          margin: 0;
+          padding: 0;
 
           .dropdown-item {
             a {
@@ -383,6 +387,11 @@
                 transform: translateX(10px);
                 opacity: 0;
                 transition: transform 0.25s ease, opacity 0.25s ease;
+
+                @media (max-width: 820px) {
+                  opacity: 0.6;
+                  transform: none;
+                }
               }
 
               &:hover {
