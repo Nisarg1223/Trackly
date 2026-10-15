@@ -1,16 +1,58 @@
-# React + Vite
+# MyFirstAngularApp
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project was generated using Angular CLI v21.2.27.
 
-Currently, two official plugins are available:
+## Development Server
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Start the development server:
 
-## React Compiler
+```bash
+ng serve
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Open http://localhost:4200/ in your browser. Changes to source files trigger automatic reloads.
 
-## Expanding the ESLint configuration
+## Generate Components
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Create a new component:
+
+```bash
+ng generate component component-name
+```
+
+View all available commands:
+
+```bash
+ng generate --help
+```
+
+## Build
+
+Build the application for production:
+
+```bash
+ng build
+```
+
+Build output is stored in the `dist/` directory.
+
+## Testing
+
+Run unit tests using Vitest:
+
+```bash
+ng test
+```
+
+For end-to-end testing, run:
+
+```bash
+ng e2e
+```
+
+Angular CLI does not include an end-to-end testing framework by default.
+
+## Resources
+
+- [Angular CLI Documentation](https://angular.dev/tools/cli)
+- [Vitest Documentation](https://vitest.dev/)
