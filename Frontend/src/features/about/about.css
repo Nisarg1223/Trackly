@@ -67,20 +67,78 @@
   animation: starPulse 4s infinite ease-in-out;
 }
 
-.star-1 { top: 12%; left: 18%; width: 3px; height: 3px; animation-delay: 0s; }
-.star-2 { top: 22%; left: 32%; width: 4px; height: 4px; animation-delay: 1.2s; }
-.star-3 { top: 15%; left: 78%; width: 3.5px; height: 3.5px; animation-delay: 0.7s; }
-.star-4 { top: 38%; left: 88%; width: 3px; height: 3px; animation-delay: 2.4s; }
-.star-5 { top: 8%; left: 62%; width: 4px; height: 4px; animation-delay: 1.8s; }
-.star-6 { top: 30%; left: 12%; width: 3px; height: 3px; animation-delay: 3.1s; }
-.star-7 { top: 26%; left: 45%; width: 2.5px; height: 2.5px; animation-delay: 2s; }
-.star-8 { top: 18%; left: 92%; width: 3px; height: 3px; animation-delay: 3.7s; }
+.star-1 {
+  top: 12%;
+  left: 18%;
+  width: 3px;
+  height: 3px;
+  animation-delay: 0s;
+}
+
+.star-2 {
+  top: 22%;
+  left: 32%;
+  width: 4px;
+  height: 4px;
+  animation-delay: 1.2s;
+}
+
+.star-3 {
+  top: 15%;
+  left: 78%;
+  width: 3.5px;
+  height: 3.5px;
+  animation-delay: 0.7s;
+}
+
+.star-4 {
+  top: 38%;
+  left: 88%;
+  width: 3px;
+  height: 3px;
+  animation-delay: 2.4s;
+}
+
+.star-5 {
+  top: 8%;
+  left: 62%;
+  width: 4px;
+  height: 4px;
+  animation-delay: 1.8s;
+}
+
+.star-6 {
+  top: 30%;
+  left: 12%;
+  width: 3px;
+  height: 3px;
+  animation-delay: 3.1s;
+}
+
+.star-7 {
+  top: 26%;
+  left: 45%;
+  width: 2.5px;
+  height: 2.5px;
+  animation-delay: 2s;
+}
+
+.star-8 {
+  top: 18%;
+  left: 92%;
+  width: 3px;
+  height: 3px;
+  animation-delay: 3.7s;
+}
 
 @keyframes starPulse {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 0.25;
     transform: scale(0.9);
   }
+
   50% {
     opacity: 1;
     transform: scale(1.4);
@@ -94,7 +152,8 @@
   position: relative;
   z-index: 30;
   width: 100%;
-  padding: 3.5rem 5.5rem 2rem 5.5rem; /* More generous vertical presence */
+  padding: 3.5rem 5.5rem 2rem 5.5rem;
+  /* More generous vertical presence */
   box-sizing: border-box;
 }
 
@@ -122,7 +181,8 @@
 
 .brand-name {
   font-family: var(--about-font-serif);
-  font-size: 3.85rem; /* Significantly larger, prominent logo */
+  font-size: 3.85rem;
+  /* Significantly larger, prominent logo */
   font-weight: 400;
   letter-spacing: -0.015em;
   line-height: 1;
@@ -143,14 +203,16 @@
 .about-nav-menu {
   display: flex;
   align-items: center;
-  gap: 4.5rem; /* Generous prominent spacing between nav items */
+  gap: 4.5rem;
+  /* Generous prominent spacing between nav items */
   margin: 0;
   padding: 0;
 }
 
 .about-nav-menu .nav-item {
   font-family: var(--about-font-sans);
-  font-size: 1.65rem; /* Large, bold, clearly legible navbar typography */
+  font-size: 1.65rem;
+  /* Large, bold, clearly legible navbar typography */
   font-weight: 450;
   color: rgba(255, 255, 255, 0.82);
   text-decoration: none;
@@ -209,7 +271,8 @@
 
 /* Nav specific pill button */
 .nav-btn {
-  font-size: 1.45rem; /* Larger, prominent pill button */
+  font-size: 1.45rem;
+  /* Larger, prominent pill button */
   font-weight: 500;
   padding: 1.05rem 3.1rem;
   letter-spacing: 0.015em;
@@ -281,7 +344,8 @@
 /* Main Editorial Headline */
 .about-hero-headline {
   font-family: var(--about-font-serif);
-  font-size: clamp(4.2rem, 6.2vw, 6.4rem); /* Large, majestic, high-visibility */
+  font-size: clamp(4.2rem, 6.2vw, 6.4rem);
+  /* Large, majestic, high-visibility */
   font-weight: 400;
   line-height: 1.12;
   letter-spacing: -0.018em;
@@ -289,7 +353,8 @@
   margin: 0 0 1.65rem 0;
   padding: 0;
   text-align: center;
-  white-space: nowrap; /* Stays proudly on one line on desktop */
+  white-space: nowrap;
+  /* Stays proudly on one line on desktop */
   text-shadow: 0 4px 35px rgba(0, 0, 0, 0.5), 0 0 65px rgba(255, 255, 255, 0.2);
   animation: starlightFadeIn 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
@@ -297,7 +362,8 @@
 /* Subtitle Copy */
 .about-hero-subtext {
   font-family: var(--about-font-sans);
-  font-size: clamp(1.2rem, 1.6vw, 1.45rem); /* ~20px to ~23px */
+  font-size: clamp(1.2rem, 1.6vw, 1.45rem);
+  /* ~20px to ~23px */
   font-weight: 400;
   line-height: 1.65;
   color: var(--about-text-subtle);
@@ -315,7 +381,8 @@
 }
 
 .hero-cta-btn {
-  font-size: 1.3rem; /* ~21px */
+  font-size: 1.3rem;
+  /* ~21px */
   font-weight: 500;
   padding: 1.15rem 3.6rem;
   letter-spacing: 0.02em;
@@ -348,6 +415,7 @@
     opacity: 0;
     transform: translateY(14px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
