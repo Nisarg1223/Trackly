@@ -178,7 +178,7 @@ const Contact = () => {
 
             {/* Menu links - Contact is active */}
             <ul className="header-nav-menu">
-              <li className="nav-item"><Link to="/#product">Product</Link></li>
+              <li className="nav-item"><Link to="/product">Product</Link></li>
               <li className="nav-item"><Link to="/about">About Us</Link></li>
               <li className="nav-item active"><Link to="/contact">Contact</Link></li>
               <li className="nav-item"><Link to="/#pricing">Pricing</Link></li>
@@ -202,7 +202,7 @@ const Contact = () => {
               <div className="header-dropdown-panel">
                 <ul className="dropdown-menu-list">
                   <li className="dropdown-item">
-                    <Link to="/#product" onClick={() => setIsDropdownOpen(false)}>
+                    <Link to="/product" onClick={() => setIsDropdownOpen(false)}>
                       <span className="item-label">Product</span>
                       <span className="item-hint">Explore features</span>
                     </Link>

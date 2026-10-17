@@ -4,6 +4,7 @@ import Home from './features/home/home.jsx';
 import Login from './features/auth/pages/login.jsx';
 import Contact from './features/contact/contact.jsx';
 import About from './features/about/about.jsx';
+import Product from './features/Product/product.jsx';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/product" element={<Product />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
